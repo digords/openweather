@@ -1,0 +1,77 @@
+<mvc:View controllerName="com.demo.openwheater.openwheaterpoc.controller.Main" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+						<SplitApp id="splitappid" masterButtonText="Master" masterNavigate="" afterMasterNavigate="" masterButton="" detailNavigate="">
+							<masterPages>
+								<Page id="masterpageid" title="Locations Basic Info" titleLevel="Auto" showNavButton="false" showHeader="true" showSubHeader="true" navButtonTooltip="" enableScrolling="true" navButtonPress="">
+									<content>
+										<List id="citylist" items="{ path: '/cities', sorter: { path: 'country', descending: false, group: '.getCountry'}, groupHeaderFactory: '.getGroupHeader'}" headerText="Cities Data" growing="true" growingScrollToLoad="true" growingThreshold="20" footerText="End of the List" noDataText="No Data" showNoData="true">
+											<items>
+												<ObjectListItem type="Navigation" title="{name}" intro="{state}" press="onObjectItemPress">
+													<attributes>
+														<ObjectAttribute title="" text="{id}"/>
+													</attributes>
+													<firstStatus>
+														<ObjectStatus title="lat" text="{coord/lat}"/>
+													</firstStatus>
+													<secondStatus>
+														<ObjectStatus title="lon" text="{coord/lon}"/>
+													</secondStatus>
+												</ObjectListItem>
+											</items>
+											<headerToolbar>
+												<OverflowToolbar>
+													<content>
+														<Title text="Cities" title="Search"/>
+														<ToolbarSpacer/>
+														<SearchField search="onSearch"/>
+													</content>
+												</OverflowToolbar>
+											</headerToolbar>
+										</List>
+									</content>
+                                    <footer><OverflowToolbar ></OverflowToolbar></footer>
+								</Page>
+							</masterPages>
+							<detailPages>
+								<Page id="detailpageid" title="Wheater Information" titleLevel="Auto" showNavButton="false" showHeader="true" showSubHeader="true" navButtonTooltip="" enableScrolling="true" navButtonPress="onNavBack">
+									<content>
+										<ObjectHeader  id="objHeader1" intro="{/sys/region}" title="{/name}" icon="{/sys/flag}" iconTooltip="{/sys/country}" visible="false" imageShape="Square" responsive="true" number="{/main/temp}" numberUnit="°C" numberState="{= ${/main/temp} > 23 ? 'Information' : 'Warning' }">
+											<attributes>
+												<ObjectAttribute title="Clouds" text="{/clouds/all} %"/>
+												<ObjectAttribute title="Feels Like" text="{/main/feels_like} °C"/>
+											</attributes>
+											<statuses>
+												<ObjectStatus title="Minimum" text="{/main/temp_min} °C" state="Error"/>
+												<ObjectStatus title="Maximum" text="{/main/temp_max} °C" state="Success"/>
+											</statuses>
+											<headerContainer>
+												<IconTabBar id="itb1" selectedKey="Hour" upperCase="true" select="onIconSelect" expandable="false" expanded="true" >
+													<items>
+														<IconTabFilter icon="sap-icon://present" iconColor="Positive" text="Hourly" key="Hour"/>
+														<IconTabSeparator/>
+														<IconTabFilter icon="sap-icon://history" iconColor="Contrast" text="Daily" key="Day"/>
+                                                        <IconTabSeparator/>
+														<IconTabFilter icon="sap-icon://alert" iconColor="Critical" text="Alert" key="Alert"/>
+                                                        <IconTabSeparator/>
+													</items>
+													<content>
+                                                        <Table id="tblWheather" inset="false" showSeparators="Inner" growing="true" growingScrollToLoad="true" sticky="ColumnHeaders" fixedLayout="false"/>
+													</content>
+												</IconTabBar>
+											</headerContainer>
+										</ObjectHeader>
+									</content>
+                                    <footer><OverflowToolbar ></OverflowToolbar></footer>
+								</Page>
+							</detailPages>
+						</SplitApp>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

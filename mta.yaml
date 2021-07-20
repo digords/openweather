@@ -1,0 +1,57 @@
+_schema-version: "3.2"
+ID: com-demo-openwheater-openwheaterpoc
+description: A Fiori application.
+version: 0.0.1
+modules:
+- name: com-demo-openwheater-openwheaterpoc-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: com-demo-openwheater-openwheaterpoc-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - comdemoopenwheateropenwheaterpoc.zip
+      name: comdemoopenwheateropenwheaterpoc
+      target-path: resources/
+- name: comdemoopenwheateropenwheaterpoc
+  type: html5
+  path: .
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: com-demo-openwheater-openwheaterpoc-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: com-demo-openwheater-openwheaterpoc-html5-srv
+    service-plan: app-host
+- name: com-demo-openwheater-openwheaterpoc-dest-srv
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: com-demo-openwheater-openwheaterpoc-dest-srv
+    service-plan: lite
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true

@@ -1,0 +1,3 @@
+<mvc:View controllerName="com.demo.openwheater.openwheaterpoc.controller.Empty" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+	<Page id="emptyId" title="" />
+    </mvc:View>

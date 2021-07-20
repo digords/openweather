@@ -1,0 +1,126 @@
+{
+    "_version": "1.32.0",
+    "sap.app": {
+        "id": "com.demo.openwheater.openwheaterpoc",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "ach": "ach",
+        "dataSources": {
+            "cityList": {
+                "uri": "model/citylist.json",
+                "type": "JSON"
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "com-demo-openwheater-openwheaterpoc-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "openweather",
+                    "action": "display",
+                    "title": "Open Weather",
+                    "subTitle": "",
+                    "icon": ""
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "sap-icon://task",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "rootView": {
+            "viewName": "com.demo.openwheater.openwheaterpoc.view.Main",
+            "type": "XML",
+            "async": true,
+            "id": "Main"
+        },
+        "dependencies": {
+            "minUI5Version": "1.66.0",
+            "libs": {
+                "sap.ui.core": {},
+                "sap.m": {},
+                "sap.ui.layout": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "com.demo.openwheater.openwheaterpoc.i18n.i18n"
+                }
+            },
+            "": {
+                "type": "sap.ui.model.json.JSONModel",
+                "dataSource": "cityList"
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "com.demo.openwheater.openwheaterpoc.view",
+                "controlAggregation": "pages",
+                "controlId": "splitappid",
+                "clearControlAggregation": false,
+                "bypassed": {
+                    "target": [
+                        "Empty"
+                    ]
+                }
+            },
+            "routes": [
+                {
+                    "name": "RouteMain",
+                    "pattern": "RouteMain",
+                    "target": [
+                        "TargetMain"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetMain": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "controlAggregation": "masterPages",
+                    "viewId": "Main",
+                    "viewName": "Main"
+                }
+            }
+        }
+    }
+}

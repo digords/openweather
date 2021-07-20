@@ -1,0 +1,20 @@
+<mvc:View controllerName="com.demo.openwheater.openwheaterpoc.controller.Details" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+<App>
+		<pages>
+	<Page id="detailpageid" title="Wheater Information" titleLevel="Auto" showNavButton="true" showHeader="true" showSubHeader="true" navButtonTooltip="" enableScrolling="true" navButtonPress="onNavBack">
+		<content>
+			<ObjectHeader binding="{/detail}" id="objHeader1" intro="{/sys/country}" title="{/name}">
+				<attributes>
+					<ObjectAttribute title="Temp" text="{/main/temp}"/>
+					<ObjectAttribute title="Sens. Térm." text="{/main/feels_like}"/>
+				</attributes>
+				<statuses>
+					<ObjectStatus title="Clima" text="{/wheater/description}"/>
+					<ObjectStatus title="Visual" text="{/wheater/main}"/>
+				</statuses>
+			</ObjectHeader>
+		</content>
+	</Page>
+    </pages>
+	</App>
+</mvc:View>
