@@ -15,6 +15,14 @@
             "cityList": {
                 "uri": "model/citylist.json",
                 "type": "JSON"
+            },
+            "OpenWeather": {
+                "uri": "/data/2.5/",
+                "type": "http"
+            },
+            "Countries": {
+                "uri": "/rest/v2/alpha",
+                "type": "http"
             }
         },
         "crossNavigation": {
@@ -28,7 +36,7 @@
                     "action": "display",
                     "title": "Open Weather",
                     "subTitle": "",
-                    "icon": ""
+                    "icon": "sap-icon://temperature"
                 }
             }
         }
@@ -48,6 +56,20 @@
             "tablet": true,
             "phone": true
         }
+    },
+    "sap.platform.abap": {
+        "uri": ""
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    },
+    "sap.platform.hcp": {
+        "uri": ""
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "openWeather.test"
     },
     "sap.ui5": {
         "flexEnabled": false,

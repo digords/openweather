@@ -46,14 +46,12 @@ sap.ui.define([
                     appid: "31b27c742d2c21b70f92ce5faefc8a16"
                 };
 
-                let sUrl = "OpenWheater/data/2.5/weather";
-
                 oView.setBusy(true);
 
-                $.get(sUrl, oParam)
+                $.get("/data/2.5/weather", oParam)
                     .then(function (response) {
                         let oModel = new sap.ui.model.json.JSONModel(response);
-                        $.get("https://restcountries.eu/rest/v2/alpha/" + response.sys.country)
+                        $.get("/rest/v2/alpha/" + response.sys.country)
                             .done(function (response) {
                                 oModel.getData().sys.country = response.nativeName;
                                 oModel.getData().sys.region = response.regionalBlocs.length === 0 ? response.subregion : response.regionalBlocs[0].acronym + " - " + response.regionalBlocs[0].name;
@@ -61,7 +59,7 @@ sap.ui.define([
                                 oView.byId("objHeader1").setModel(oModel);
                                 oView.byId("objHeader1").setVisible(true);
                                 _self.getTableContent(oModel);
-                                oView.setBusy(false);
+                                //oView.setBusy(false);
                             })
                             .fail(function (err) {
                                 oView.byId("objHeader1").setModel(oModel);
@@ -92,9 +90,11 @@ sap.ui.define([
                     appid: "31b27c742d2c21b70f92ce5faefc8a16"
                 };
 
-                $.get("OpenWheater/data/2.5/onecall", oParam)
+                $.get("/data/2.5/onecall", oParam)
                     .done(function (response) {
                         oView.setModel(response, "onecall");
+                        oView.byId("itb1").fireSelect({key: "Hour"});
+                        oView.setBusy(false);
                     })
                     .fail(function (err) {
                         if (err !== undefined)

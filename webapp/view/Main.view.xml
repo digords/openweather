@@ -27,7 +27,7 @@
 													<content>
 														<Title text="Cities" title="Search"/>
 														<ToolbarSpacer/>
-														<SearchField search="onSearch"/>
+														<SearchField search="onSearch" width="75%"/>
 													</content>
 												</OverflowToolbar>
 											</headerToolbar>
